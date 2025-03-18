@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Курсы по защите от социальной инженерии
+{% endblock %}
+
+{% block content %}
+
+<ul class="nav nav-pills sticky-top bg-white nav-fill">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'main_page' %}">
+      <span style="font-weight: bold;">Главная</span>
+    </a>
+  </li>
+{% if not user.is_authenticated %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'register' %}">
+      <span style="font-weight: bold;">Регистрация</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'login' %}">
+      <span style="font-weight: bold;">Войти</span>
+    </a>
+  </li>
+  {% else %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'profile' %}">
+      <span style="font-weight: bold;">Профиль</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">
+      <span style="font-weight: bold;">Выйти</span>
+    </a>
+  </li>
+  {% endif %}
+</ul>
+<style type="text/css">
+main {
+  padding: 20px;
+}
+
+section {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: #007BFF;
+}
+
+button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+</style>
+<main>
+  <section id="about">
+      <h2>Что такое социальная инженерия?</h2>
+      <p>Социальная инженерия — это метод манипуляции людьми с целью получения конфиденциальной информации или доступа к защищённым ресурсам. Злоумышленники используют различные тактики, чтобы обмануть своих жертв.</p>
+  </section>
+
+  <section id="services">
+      <h2>Наши услуги</h2>
+      <ul>
+          <li><strong>Обучение и тренинги:</strong> Курсы по защите от социальной инженерии для индивидуальных пользователей и организаций.</li>
+          <li><strong>Вебинары и семинары:</strong> Онлайн-мероприятия с экспертами по кибербезопасности.</li>
+          <li><strong>Консультации:</strong> Профессиональная помощь в разработке стратегий защиты.</li>
+      </ul>
+  </section>
+
+  <section id="contact">
+      <h2>Связаться с нами</h2>
+      <p>Не дайте злоумышленникам шанса! Запишитесь на наш курс или вебинар прямо сейчас.</p>
+      <button onclick="alert('Спасибо за ваш интерес!')">Записаться на курс</button>
+  </section>
+</main>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}
