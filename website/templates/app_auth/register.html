@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Регистрация
@@ -35,11 +36,33 @@
     </li>
     {% endif %}
   </ul>
-
+	<style type="text/css">
+		body {
+			background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+			background-size: cover;
+		}
+		
+		body::after {
+			content: "";
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
+			z-index: -1;
+		}
+		main {
+			padding: 20px;
+			position : relative;
+			z-index: 1;
+		}
+		</style>
+	<main>
   <div class="row">
     <div class="col" style="margin: 50px;">
       <div class="display-2">
-        <span class="badge bg-primary">Страница регистрации пользователя</span>
+       <center> <span class="badge bg-primary">Страница регистрации пользователя</span> </center>
       </div>
     </div>
   </div>
@@ -66,4 +89,5 @@
     </div>
   </form>
 </div>
+</main>
 {% endblock %}

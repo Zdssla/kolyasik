@@ -39,49 +39,59 @@
   {% endif %}
 </ul>
 <style type="text/css">
-main {
-  padding: 20px;
-}
-
-section {
-  margin: 20px 0;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h2 {
-  color: #007BFF;
-}
-
-button {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-</style>
+	body {
+		background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+		background-size: cover;
+	}
+	
+	body::after {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
+		z-index: -1;
+	}
+	main {
+		padding: 20px;
+		position: relative;
+		z-index: 1;
+		text-align: left; /* Выравнивание текста по левому краю */
+	}
+	
+	section {
+		margin: 20px 0;
+		padding: 15px;
+		border-radius: 5px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		background: white;
+		text-align: left; /* Выравнивание текста по левому краю */
+	}
+	
+	h2 {
+		color: #007BFF;
+	}
+	
+	button {
+		background-color: #28a745;
+		color: white;
+		border: none;
+		padding: 10px 15px;
+		cursor: pointer;
+	}
+	</style>
 <main>
   <section id="about">
       <h2>Что такое социальная инженерия?</h2>
-      <p>Социальная инженерия — это метод манипуляции людьми с целью получения конфиденциальной информации или доступа к защищённым ресурсам. Злоумышленники используют различные тактики, чтобы обмануть своих жертв.</p>
+      <p>В нашем мире, где каждый клик может стать капканом, а любое сообщение или звонок—удочкой мошенников,
+				 знания о социальной инженерии и методах обмана становятся не просто полезными — они жизненно необходимы.
+				 Представляем вашему вниманию онлайн-курс по противодействию социальной инженерии и мошенничеству, который даст
+				 базовые навыки защиты в цифровой эпохе. Присоединяйтесь к нам, сделайте свою цифровую жизнь безопасной и неприступной.
+			   Это решение может стать лучшей инвестицией в вашу персональную безопасность. </p>
   </section>
 
-  <section id="services">
-      <h2>Наши услуги</h2>
-      <ul>
-          <li><strong>Обучение и тренинги:</strong> Курсы по защите от социальной инженерии для индивидуальных пользователей и организаций.</li>
-          <li><strong>Вебинары и семинары:</strong> Онлайн-мероприятия с экспертами по кибербезопасности.</li>
-          <li><strong>Консультации:</strong> Профессиональная помощь в разработке стратегий защиты.</li>
-      </ul>
-  </section>
-
-  <section id="contact">
-      <h2>Связаться с нами</h2>
-      <p>Не дайте злоумышленникам шанса! Запишитесь на наш курс или вебинар прямо сейчас.</p>
-      <button onclick="alert('Спасибо за ваш интерес!')">Записаться на курс</button>
-  </section>
 </main>
 <br><br><br><br><br><br><br><br><br><br><br><br>
 

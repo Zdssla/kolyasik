@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'app_auth',
+		'quiz',
 ]
 
 MIDDLEWARE = [
@@ -111,5 +112,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    Path.joinpath(BASE_DIR, 'static')
+    Path.joinpath(BASE_DIR, 'static') 
 ]

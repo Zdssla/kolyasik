@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('myauth/', include('app_auth.urls')),
+    path('quiz/', include('quiz.urls')),
 ]
 
 if settings.DEBUG:
