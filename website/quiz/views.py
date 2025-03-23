@@ -13,3 +13,7 @@ def quiz_view(request, quiz_id):
                     score += 1
         return render(request, 'quiz/result.html', {'quiz': quiz, 'score': score})
     return render(request, 'quiz/quiz.html', {'quiz': quiz})
+
+def quiz_list_view(request):
+    quizzes = Quiz.objects.all()  # Получаем все викторины
+    return render(request, 'quiz/courses.html', {'quizzes': quizzes})
