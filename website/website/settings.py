@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'app_auth',
-		'quiz',
+	'quiz',
 ]
 
 MIDDLEWARE = [
