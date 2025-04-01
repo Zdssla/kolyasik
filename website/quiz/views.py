@@ -17,3 +17,9 @@ def quiz_view(request, quiz_id):
 def quiz_list_view(request):
     quizzes = Quiz.objects.all()  # Получаем все викторины
     return render(request, 'quiz/courses.html', {'quizzes': quizzes})
+
+def first_quiz(request):
+    return render(request, 'quiz/quizes/first.html')
+
+def courses(request):
+    return render(request, 'quiz/courses.html')

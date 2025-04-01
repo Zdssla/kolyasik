@@ -42,54 +42,77 @@
   {% endif %}
 </ul>
 <style type="text/css">
-	body {
-		background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
-		background-size: cover;
+    body {
+        background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+    }
+    
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
+        z-index: -1;
+    }
+    main {
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+        text-align: left; /* Выравнивание текста по левому краю */
+    }
+    
+    section {
+        margin: 20px 0;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: white;
+        text-align: left; /* Выравнивание текста по левому краю */
+    }
+    h2 {
+		font-size: 2em; /* Увеличиваем размер заголовка */
+		margin-bottom: 20px; /* Отступ снизу */
+		color: #333; /* Цвет заголовка */
 	}
-	
-	body::after {
-		content: "";
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
-		z-index: -1;
-	}
-	main {
-		padding: 20px;
-		position: relative;
-		z-index: 1;
-		text-align: left; /* Выравнивание текста по левому краю */
-	}
-	
-	section {
-		margin: 20px 0;
-		padding: 15px;
-		border-radius: 5px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		background: white;
-		text-align: left; /* Выравнивание текста по левому краю */
-	}
-	
-	h2 {
-		color: #007BFF;
-	}
-	
-	button {
-		background-color: #28a745;
-		color: white;
-		border: none;
-		padding: 10px 15px;
-		cursor: pointer;
-	}
-	</style>	
+    
+    ul {
+        list-style-type: none; /* Убираем стандартные маркеры списка */
+        padding: 0;
+    }
+    
+    ul li {
+        margin-bottom: 15px; /* Отступ между элементами списка */
+        font-size: 1.2em; /* Увеличиваем размер текста */
+        line-height: 1.5; /* Увеличиваем межстрочный интервал */
+    }
+    
+    ul li a {
+        text-decoration: none; /* Убираем подчеркивание ссылок */
+        color: #007BFF; /* Цвет ссылок */
+        font-weight: bold; /* Жирный текст для ссылок */
+    }
+    
+    ul li a:hover {
+        text-decoration: underline; /* Подчеркивание при наведении */
+        color: #0056b3; /* Более темный оттенок синего при наведении */
+    }
+    
+    button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+</style>
 <main>
 	<section id="intro">
 	  <h2>Выберите интересующий вас курс из списка ниже:</h2>
 	  <ul>
-		<li><a href="quizes/first.html"> Курс 1: Основы социальной инженерии </a></li>
+		<li><a href="http://127.0.0.1:8000/quiz/first/"> Курс 1: Основы социальной инженерии </a></li>
 		<li> Курс 2: Фишинг и его виды </li>
 		<li> Курс 3: Методы социальной инженерии </li>
 		<li> Курс 4: Защита от социальной инженери </li>

@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import quiz_view, quiz_list_view
+from . import views
 
 urlpatterns = [
-    path('', quiz_list_view, name='courses'), 
-    path('', quiz_list_view, name='first'), 
+    path('first/', views.first_quiz, name='first'),
+    path('courses/', views.courses, name='courses'),
+] 
     #path('<int:quiz_id>/', quiz_view, name='quiz'),
-]
