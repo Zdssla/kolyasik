@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Quiz, Question, Answer
 
 def quiz_view(request, quiz_id):
-    quiz = Quiz.objects.get(id=quiz_id)
+    quiz = get_object_or_404(Quiz, id=quiz_id)  # Получение викторины по ID
     if request.method == 'POST':
         score = 0
         for question in quiz.questions.all():
@@ -20,6 +20,19 @@ def quiz_list_view(request):
 
 def first_quiz(request):
     return render(request, 'quiz/quizes/first.html')
+
+def second_quiz(request):
+    return render(request, 'quiz/quizes/second.html')
+
+def third_quiz(request):
+		return render(request, 'quiz/quizes/third.html' )
+
+def fourth_quiz(request):
+    quiz_id = 1  # Укажите ID теста, связанного с этим курсом
+    return render(request, 'quiz/quizes/fourth.html', {'quiz_id': quiz_id})
+
+def quiz(request):
+      return render(request, 'quiz/quiz.html')
 
 def courses(request):
     return render(request, 'quiz/courses.html')

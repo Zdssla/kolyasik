@@ -45,81 +45,101 @@
 </ul>
 <style type="text/css">
 	body {
-		background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
-		background-size: cover;
+			background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+			background-size: cover;
 	}
 	
 	body::after {
-		content: "";
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
-		z-index: -1;
+			content: "";
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
+			z-index: -1;
 	}
 	main {
-		padding: 20px;
-		position: relative;
-		z-index: 1;
-		text-align: left; /* Выравнивание текста по левому краю */
+			padding: 20px;
+			position: relative;
+			z-index: 1;
+			text-align: left; /* Выравнивание текста по левому краю */
 	}
 	
 	section {
-		margin: 20px 0;
-		padding: 15px;
-		border-radius: 5px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		background: white;
-		text-align: left; /* Выравнивание текста по левому краю */
+			margin: 20px 0;
+			padding: 15px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			background: white;
+			text-align: left; /* Выравнивание текста по левому краю */
+	}
+	h2 {
+	font-size: 2em; /* Увеличиваем размер заголовка */
+	margin-bottom: 20px; /* Отступ снизу */
+	color: #333; /* Цвет заголовка */
+}
+	
+	ul {
+			list-style-type: none; /* Убираем стандартные маркеры списка */
+			padding: 0;
 	}
 	
-	h2 {
-		color: #007BFF;
+	ul li {
+			margin-bottom: 15px; /* Отступ между элементами списка */
+			font-size: 1.2em; /* Увеличиваем размер текста */
+			line-height: 1.5; /* Увеличиваем межстрочный интервал */
+	}
+	
+	ul li a {
+			text-decoration: none; /* Убираем подчеркивание ссылок */
+			color: #007BFF; /* Цвет ссылок */
+			font-weight: bold; /* Жирный текст для ссылок */
+	}
+	
+	ul li a:hover {
+			text-decoration: underline; /* Подчеркивание при наведении */
+			color: #0056b3; /* Более темный оттенок синего при наведении */
 	}
 	
 	button {
-		background-color: #28a745;
-		color: white;
-		border: none;
-		padding: 10px 15px;
-		cursor: pointer;
+			background-color: #28a745;
+			color: white;
+			border: none;
+			padding: 10px 15px;
+			cursor: pointer;
 	}
-	</style>
+</style>
 <main>
-  <section id="intro">
-    <h1>Социальная инженерия</h1>
-    <p>Добро пожаловать на курс по защите от социальной инженерии. Узнайте, как злоумышленники используют психологические приёмы для получения конфиденциальной информации, и как защитить себя.</p>
-    
-  </section>
+<h2 style="font-size: 2.5em; color: #2c3e50; text-align: center; margin-bottom: 30px;">Добро пожаловать на курсы по социальной инженерии!</h2>
+<h3 style="font-size: 1.2em; line-height: 1.8; color: #34495e;">На этих курсах вы узнаете о различных методах социальной инженерии, их применении и способах защиты от них.
+	Вы получите знания, которые помогут вам защитить себя и своих близких от мошенников и киберугроз. Курсы предназначены для всех, кто хочет повысить свою осведомленность в области безопасности и научиться защищать себя от мошенничества.
+	Вы сможете изучить различные аспекты социальной инженерии, включая фишинг, вишинг и фарминг, а также методы защиты от них.</h3>
+</p>
+<br>
+<h3 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Преимущества наших курсов:</h3>
 
-  <section id="course-details">
-    <h2>О курсе</h2>
-    <p>Этот курс поможет вам понять основные методы социальной инженерии и научиться защищаться от них.</p>
-    <ul>
-      <li><strong>Фишинг:</strong> Узнайте, как распознавать поддельные письма и сообщения.</li>
-      <li><strong>Вишинг:</strong> Научитесь защищаться от мошеннических звонков.</li>
-      <li><strong>Претекстинг:</strong> Поймите, как злоумышленники создают ложные предлоги для получения информации.</li>
-      <li><strong>Бейтинг:</strong> Избегайте ловушек, таких как заражённые флешки или ссылки.</li>
-    </ul>
-  </section>
+<ul>
+<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Каждый курс включает в себя теоретическую часть</li>
+<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Вас ждут тесты для проверки ваших знаний</li>
+<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Доступ к материалам курса в любое время</li>
+<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Доступ к дополнительным материалам и ресурсам</li>
+<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Удобный интерфейс и навигация по курсу</li>
+<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Возможность проходить курс в своем темпе</li>
+</ul>
 
-  <section id="benefits">
-    <h2>Что вы узнаете</h2>
-    <p>Пройдя этот курс, вы научитесь:</p>
-    <ul>
-      <li>Распознавать угрозы социальной инженерии.</li>
-      <li>Эффективно защищать свои данные.</li>
-      <li>Обучать коллег и близких основам кибербезопасности.</li>
-    </ul>
-  </section>
+<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Структура курсов:</h2>
+<ul style="font-size: 1.2em; line-height: 1.8; color: #2c3e50; margin-left: 20px;">
+	<li style="margin-bottom: 10px;"><strong>Введение в социальную инженерию</strong></li>
+	<li style="margin-bottom: 10px;"><strong>Методы социальной инженерии</strong></li>
+	<li style="margin-bottom: 10px;"><strong>Фишинг и его виды</strong></li>
+	<li style="margin-bottom: 10px;"><strong>Защита от социальной инженерии</strong></li>
+	<li style="margin-bottom: 10px;"><strong>Практические задания и тесты</strong></li>
+	<li style="margin-bottom: 10px;"><strong>Заключение и рекомендации</strong></li>
+</ul>
 
-  <section id="enroll">
-    <h2>Запишитесь на курс</h2>
-    <p>Начните обучение прямо сейчас и защитите себя от угроз социальной инженерии.</p>
-    <button onclick="location.href='http://127.0.0.1:8000/myauth/register/'">Записаться</button>
-  </section>
-</main>
+  <h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Запишитесь на курс</h2>
+  <h3 style="font-size: 1.2em; line-height: 1.8; color: #34495e;"> Начните обучение прямо сейчас и защитите себя от угроз социальной инженерии.</h3>
+  <button onclick="location.href='http://127.0.0.1:8000/myauth/register/'">Записаться</button>
 
 {% endblock %}

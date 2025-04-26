@@ -5,7 +5,6 @@
 Профиль пользователя
 {% endblock %}
 
-
 {% block content %}
 <ul class="nav nav-pills sticky-top bg-white nav-fill">
   <li class="nav-item">
@@ -42,9 +41,84 @@
   </li>
   {% endif %}
 </ul>
-<div class="col" style="margin: 50px;">
-  <div class="display-2">
-    <span class="badge bg-primary">Сейчас вы находитесь на сайте под ником {{ user }}.</span>
-  </div>
-</div>
+<style type="text/css">
+	body {
+			background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+			background-size: cover;
+	}
+	
+	body::after {
+			content: "";
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
+			z-index: -1;
+	}
+	main {
+			padding: 20px;
+			position: relative;
+			z-index: 1;
+			text-align: left; /* Выравнивание текста по левому краю */
+	}
+	
+	section {
+			margin: 20px 0;
+			padding: 15px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			background: white;
+			text-align: left; /* Выравнивание текста по левому краю */
+	}
+	h2 {
+	font-size: 2em; /* Увеличиваем размер заголовка */
+	margin-bottom: 20px; /* Отступ снизу */
+	color: #333; /* Цвет заголовка */
+}
+	
+	ul {
+			list-style-type: none; /* Убираем стандартные маркеры списка */
+			padding: 0;
+	}
+	
+	ul li {
+			margin-bottom: 15px; /* Отступ между элементами списка */
+			font-size: 1.2em; /* Увеличиваем размер текста */
+			line-height: 1.5; /* Увеличиваем межстрочный интервал */
+	}
+	
+	ul li a {
+			text-decoration: none; /* Убираем подчеркивание ссылок */
+			color: #007BFF; /* Цвет ссылок */
+			font-weight: bold; /* Жирный текст для ссылок */
+	}
+	
+	ul li a:hover {
+			text-decoration: underline; /* Подчеркивание при наведении */
+			color: #0056b3; /* Более темный оттенок синего при наведении */
+	}
+	
+	button {
+			background-color: #28a745;
+			color: white;
+			border: none;
+			padding: 10px 15px;
+			cursor: pointer;
+	}
+</style>
+<main>
+<h1 style="font-size: 2.5em; color: #2c3e50; text-align: left; margin-bottom: 30px;">Профиль пользователя</h1>
+<br>
+<h3 style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Пожалуйста, убедитесь, что ваши данные актуальны и точны.</h3>
+<br>
+<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;"> Ваши данные </h2>
+<ul>
+	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Имя пользователя: {{ user.username }}
+	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Email: {{ user.email }}
+	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Дата регистрации: {{ user.date_joined }}
+	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Если вы хотите выйти из своего аккаунта, нажмите <a href="{% url 'logout' %}">Выйти</a>.
+</ul>
+</main>
 {% endblock %}

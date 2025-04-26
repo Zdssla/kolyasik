@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Результаты{% endblock %}
+{% block title %}Результаты теста{% endblock %}
 
 {% block content %}
 <h1>Результаты теста: {{ quiz.title }}</h1>
 <p>Ваш результат: {{ score }} из {{ quiz.questions.count }}</p>
-<a href="{% url 'main_page' %}" class="btn btn-primary">Вернуться на главную</a>
+<a href="{% url 'courses' %}" class="btn btn-primary">Вернуться к курсам</a>
 {% endblock %}

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+Защита от социальной инженерии
+{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+    background-size: cover; /* Масштабирование изображения для покрытия всей страницы */
+    font-family: Arial, sans-serif; /* Удобный для чтения шрифт */
+    color: #343a40; /* Цвет текста */
+    margin: 0;
+    padding: 0;
+  }
+
+  section {
+    background: rgba(255, 255, 255, 0.9); /* Белый фон с прозрачностью для контента */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    margin: 20px auto; /* Отступы сверху и снизу */
+    max-width: 1500px; /* Максимальная ширина секции */
+  }
+
+  h1, h2 {
+    color: #343a40; /* Темный цвет для заголовков */
+  }
+
+  h1 {
+    font-size: 2em; /* Увеличенный размер заголовка */
+    margin-bottom: 15px; /* Отступ снизу */
+  }
+
+  h2 {
+    font-size: 1.5em; /* Размер подзаголовка */
+    margin-top: 20px; /* Отступ сверху */
+    margin-bottom: 10px; /* Отступ снизу */
+  }
+
+  ul {
+    list-style-type: disc; /* Маркеры для списков */
+    margin-left: 20px; /* Отступ слева */
+  }
+
+  ul li {
+    margin-bottom: 10px; /* Отступ между элементами списка */
+  }
+
+  ul li span {
+    font-weight: bold; /* Жирный текст для важных элементов */
+  }
+
+  p {
+    margin-bottom: 15px; /* Отступ снизу для абзацев */
+  }
+</style>
+
+<ul class="nav nav-pills sticky-top bg-white nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'main_page' %}">
+      <span style="font-weight: bold;">Главная</span>
+    </a>
+  </li>
+{% if not user.is_authenticated %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'register' %}">
+      <span style="font-weight: bold;">Регистрация</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'login' %}">
+      <span style="font-weight: bold;">Войти</span>
+    </a>
+  </li>
+  {% else %}
+    <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'courses' %}">
+      <span style="font-weight: bold;">Курсы</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'profile' %}">
+      <span style="font-weight: bold;">Профиль</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">
+      <span style="font-weight: bold;">Выйти</span>
+    </a>
+  </li>
+  {% endif %}
+</ul>
+
+<section>
+	<h1 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;"> Как защититься от атак?</h1>
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Чтобы снизить риск атак социальной инженерии, необходимо соблюдать базовые правила кибербезопасности.
+		Это включает в себя использование сложных паролей, регулярное обновление программного обеспечения и осторожность при взаимодействии с незнакомыми людьми.
+		Также важно обучать сотрудников и пользователей основам кибербезопасности, чтобы они могли распознавать потенциальные угрозы.
+
+	</p>
+	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Основные меры защиты:</h2>
+	<ul>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Используйте сложные пароли.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Включите двухфакторную аутентификацию.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Будьте осторожны с письмами и звонками.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Не скачивайте файлы из непроверенных источников.</li>
+	</ul>
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Следуя этим рекомендациям, вы сможете значительно снизить риск стать жертвой социальной инженерии и защитить свои данные.
+	</p>
+	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Заключение</h2>
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Социальная инженерия – это серьезная угроза, которая требует внимания и осторожности.
+		Понимание методов атак и способов защиты поможет вам защитить себя и свою информацию.
+		Помните, что безопасность начинается с вас!
+	</p>
+
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Спасибо за внимание к этому курсу!
+		Надеемся, что вы узнали много нового и полезного.
+		Помните, что кибербезопасность – это не только технологии, но и ваше поведение в интернете.
+		Будьте внимательны и осторожны, и вы сможете защитить себя от атак социальной инженерии.
+	</p>
+	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Тест на знание социальной инженерии</h2>
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Чтобы проверить свои знания о социальной инженерии, пройдите наш тест.
+		Он поможет вам закрепить полученные знания и понять, насколько вы готовы к защите от атак.
+		Тест состоит из нескольких вопросов, которые охватывают основные темы курса.
+		Выберите правильный ответ на каждый вопрос и получите оценку в конце.
+	</p>
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Тестирование знаний – это важный шаг в обучении кибербезопасности.
+		Это поможет вам понять, насколько вы усвоили материал и какие темы требуют дополнительного изучения.
+		Не бойтесь ошибаться – это часть процесса обучения!
+		Важно учиться на своих ошибках и стремиться к улучшению.
+	</p>
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Надеемся, что вы получите удовольствие от прохождения теста и узнаете много нового.
+		Удачи!
+	</p>
+	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		Чтобы пройти тест, нажмите на кнопку ниже.
+	</p>
+	<a href="{% url 'quiz' quiz_id=1 %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+		<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Пройти тест</button>
+	</a>
+</section>
+
+<footer class="bg-light text-center text-lg-start">
+	<div class="text-center p-3" style="background-color: #f8f9fa;">
+		© 2025 Все права защищены
+	</div>
+</footer>
+
+{% endblock %}
