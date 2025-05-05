@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+Тест по защите от социальной инженерии
+{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: url("{% static 'images/270.jpg' %}") no-repeat center center fixed;
+    background-size: cover; /* Масштабирование изображения для покрытия всей страницы */
+    font-family: Arial, sans-serif; /* Удобный для чтения шрифт */
+    color: #343a40; /* Цвет текста */
+    margin: 0;
+    padding: 0;
+  }
+
+  section {
+    background: rgba(255, 255, 255, 0.9); /* Белый фон с прозрачностью для контента */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    margin: 20px auto; /* Отступы сверху и снизу */
+    max-width: 1500px; /* Максимальная ширина секции */
+  }
+
+  h1, h2 {
+    color: #343a40; /* Темный цвет для заголовков */
+  }
+
+  h1 {
+    font-size: 2em; /* Увеличенный размер заголовка */
+    margin-bottom: 15px; /* Отступ снизу */
+  }
+
+  h2 {
+    font-size: 1.5em; /* Размер подзаголовка */
+    margin-top: 20px; /* Отступ сверху */
+    margin-bottom: 10px; /* Отступ снизу */
+  }
+
+  ul {
+    list-style-type: disc; /* Маркеры для списков */
+    margin-left: 20px; /* Отступ слева */
+  }
+
+  ul li {
+    margin-bottom: 10px; /* Отступ между элементами списка */
+  }
+
+  ul li span {
+    font-weight: bold; /* Жирный текст для важных элементов */
+  }
+
+  p {
+    margin-bottom: 15px; /* Отступ снизу для абзацев */
+  }
+</style>
+
+<ul class="nav nav-pills sticky-top bg-white nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'main_page' %}">
+      <span style="font-weight: bold;">Главная</span>
+    </a>
+  </li>
+{% if not user.is_authenticated %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'register' %}">
+      <span style="font-weight: bold;">Регистрация</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'login' %}">
+      <span style="font-weight: bold;">Войти</span>
+    </a>
+  </li>
+  {% else %}
+    <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'courses' %}">
+      <span style="font-weight: bold;">Курсы</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'profile' %}">
+      <span style="font-weight: bold;">Профиль</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">
+      <span style="font-weight: bold;">Выйти</span>
+    </a>
+  </li>
+  {% endif %}
+</ul>
+
+<div id="test" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+	<div style="margin-bottom: 20px;">
+		<p style="font-weight: bold; color: #2c3e50;">Вопрос 1: Какой из перечисленных методов наиболее точно описывает атаку социальной инженерии?</p>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="1" data-right> Использование психологических манипуляций для получения конфиденциальной информации</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="1"> Применение сложных алгоритмов для взлома систем</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="1"> Использование вредоносного ПО для шифрования данных</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="1"> Создание поддельных веб-сайтов для сбора данных</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="1"> Анализ сетевого трафика для выявления уязвимостей</label>
+	</div>
+
+	<div style="margin-bottom: 20px;">
+		<p style="font-weight: bold; color: #2c3e50;">Вопрос 2: Какой из следующих сценариев является примером фишинга?</p>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="2"> Получение звонка от службы поддержки с просьбой подтвердить личные данные</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="2" data-right> Получение электронного письма с поддельной ссылкой для входа в аккаунт</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="2"> Использование сложных паролей для защиты аккаунтов</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="2"> Установка антивирусного ПО для предотвращения атак</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="2"> Проведение регулярных обновлений программного обеспечения</label>
+	</div>
+	
+	<div style="margin-bottom: 20px;">
+		<p style="font-weight: bold; color: #2c3e50;">Вопрос 3: Какой из перечисленных методов наиболее эффективен для предотвращения атак социальной инженерии?</p>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="3"> Использование сложных паролей</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="3" data-right> Обучение сотрудников распознаванию подозрительных действий</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="3"> Установка межсетевых экранов</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="3"> Регулярное обновление операционной системы</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="3"> Использование VPN для шифрования трафика</label>
+	</div>
+
+	<div style="margin-bottom: 20px;">
+		<p style="font-weight: bold; color: #2c3e50;">Вопрос 4: Что из перечисленного лучше всего описывает атаку "pretexting"?</p>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="4"> Использование вредоносного ПО для кражи данных</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="4" data-right> Создание ложного сценария для получения конфиденциальной информации</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="4"> Взлом паролей с использованием брутфорса</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="4"> Перехват сетевого трафика для анализа данных</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="4"> Использование поддельных сертификатов безопасности</label>
+	</div>
+
+	<div style="margin-bottom: 20px;">
+		<p style="font-weight: bold; color: #2c3e50;">Вопрос 5: Какой из следующих признаков может указывать на фишинговую атаку?</p>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="5"> Электронное письмо содержит грамматические ошибки</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="5" data-right> Ссылка в письме ведет на подозрительный или незнакомый сайт</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="5"> Письмо отправлено с официального домена компании</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="5"> Письмо содержит поздравление с праздником</label>
+		<label style="display: block; margin-bottom: 5px;">
+			<input type="radio" name="5"> Письмо подписано именем вашего коллеги</label>
+		
+		<div style="margin-bottom: 20px;">
+			<p style="font-weight: bold; color: #2c3e50;">Вопрос 6: Какой из следующих методов помогает защититься от фишинга?</p>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="6"> Использование одного пароля для всех аккаунтов</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="6" data-right> Проверка ссылок перед переходом по ним</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="6"> Игнорирование обновлений браузера</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="6"> Открытие вложений из неизвестных источников</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="6"> Использование публичных Wi-Fi сетей без VPN</label>
+		</div>
+
+		<div style="margin-bottom: 20px;">
+			<p style="font-weight: bold; color: #2c3e50;">Вопрос 7: Что из перечисленного является примером атаки "baiting"?</p>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="7"> Отправка поддельных счетов для получения оплаты</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="7" data-right> Оставление зараженного USB-устройства в общественном месте</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="7"> Использование сложных паролей</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="7"> Установка антивирусного ПО</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="7"> Регулярное обновление программного обеспечения</label>
+		</div>
+
+		<div style="margin-bottom: 20px;">
+			<p style="font-weight: bold; color: #2c3e50;">Вопрос 8: Какой из следующих признаков может указывать на атаку социальной инженерии?</p>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="8"> Запрос на предоставление конфиденциальной информации от неизвестного лица</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="8" data-right> Срочный запрос с угрозой последствий</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="8"> Предложение обновить программное обеспечение</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="8"> Получение рекламного письма</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="8"> Уведомление о доставке посылки</label>
+		</div>
+
+		<div style="margin-bottom: 20px;">
+			<p style="font-weight: bold; color: #2c3e50;">Вопрос 9: Какой из следующих методов лучше всего помогает предотвратить атаки социальной инженерии?</p>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="9"> Использование сложных паролей</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="9" data-right> Проведение регулярных тренингов по безопасности</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="9"> Установка антивирусного ПО</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="9"> Использование VPN</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="9"> Регулярное обновление программного обеспечения</label>
+		</div>
+
+		<div style="margin-bottom: 20px;">
+			<p style="font-weight: bold; color: #2c3e50;">Вопрос 10: Какой из следующих сценариев является примером атаки "tailgating"?</p>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="10"> Использование поддельного удостоверения личности</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="10" data-right> Проход в защищенную зону, следуя за сотрудником</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="10"> Отправка фальшивых электронных писем</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="10"> Установка вредоносного ПО</label>
+			<label style="display: block; margin-bottom: 5px;">
+				<input type="radio" name="10"> Использование сложных паролей</label>
+		</div>
+	<button id="submit-test" style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">Завершить тест</button>
+	<p id="result" style="font-size: 1.2em; line-height: 1.8; color: #34495e; margin-top: 20px;"></p>
+</div>
+<script>
+	document.getElementById('submit-test').addEventListener('click', function() {
+		let score = 0;
+		const totalQuestions = 10;
+
+		for (let i = 1; i <= totalQuestions; i++) {
+			const radios = document.getElementsByName(i);
+			for (const radio of radios) {
+				if (radio.checked && radio.dataset.right) {
+					score++;
+				}
+			}
+		}
+
+		const resultText = `Вы ответили правильно на ${score} из ${totalQuestions} вопросов.`;
+		document.getElementById('result').innerText = resultText;
+	});
+	document.getElementById('result').style.display = 'block';
+	document.getElementById('result').style.fontSize = '1.5em';
+	document.getElementById('result').style.color = '#2c3e50';
+	document.getElementById('result').style.fontWeight = 'bold';
+	document.getElementById('result').style.marginTop = '20px';
+	document.getElementById('result').style.textAlign = 'center';
+	document.getElementById('result').style.padding = '10px';
+	document.getElementById('result').style.backgroundColor = '#e0f7fa';
+	document.getElementById('result').style.borderRadius = '5px';
+	document.getElementById('result').style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+	document.getElementById('result').style.transition = 'all 0.3s ease-in-out';
+	document.getElementById('result').style.transform = 'scale(1.05)';
+
+</script>
+{% endblock %}

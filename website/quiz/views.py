@@ -18,21 +18,21 @@ def quiz_list_view(request):
     quizzes = Quiz.objects.all()  # Получаем все викторины
     return render(request, 'quiz/courses.html', {'quizzes': quizzes})
 
-def first_quiz(request):
+def first(request):
     return render(request, 'quiz/quizes/first.html')
 
-def second_quiz(request):
+def second(request):
     return render(request, 'quiz/quizes/second.html')
 
-def third_quiz(request):
+def third(request):
 		return render(request, 'quiz/quizes/third.html' )
 
-def fourth_quiz(request):
+def fourth(request):
     quiz_id = 1  # Укажите ID теста, связанного с этим курсом
     return render(request, 'quiz/quizes/fourth.html', {'quiz_id': quiz_id})
 
-def quiz(request):
-      return render(request, 'quiz/quiz.html')
-
 def courses(request):
     return render(request, 'quiz/courses.html')
+
+def test(request):
+     return render(request, 'quiz/quizes/test.html')
