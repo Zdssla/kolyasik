@@ -40,22 +40,22 @@
     margin-bottom: 10px; /* Отступ снизу */
   }
 
-  ul {
-    list-style-type: disc; /* Маркеры для списков */
-    margin-left: 20px; /* Отступ слева */
-  }
+	ul {
+		margin-left: 20px; /* Отступ слева */
+		list-style-type: none; /* Убираем кружочки в списках */
+	}
 
-  ul li {
-    margin-bottom: 10px; /* Отступ между элементами списка */
-  }
+	ul li {
+		margin-bottom: 10px; /* Отступ между элементами списка */
+	}
 
-  ul li span {
-    font-weight: bold; /* Жирный текст для важных элементов */
-  }
+	ul li span {
+		font-weight: bold; /* Жирный текст для важных элементов */
+	}
 
-  p {
-    margin-bottom: 15px; /* Отступ снизу для абзацев */
-  }
+	p {
+		margin-bottom: 15px; /* Отступ снизу для абзацев */
+	}
 </style>
 
 <ul class="nav nav-pills sticky-top bg-white nav-fill">
@@ -111,11 +111,11 @@
 	</p>
 	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Основные виды фишинга:</h2>
 	<ul>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;"><span>Email-фишинг</span> – мошеннические письма и сайты, которые маскируются под легитимные ресурсы.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;"><span>Смишинг</span> – телефонное мошенничество, при котором злоумышленники представляются сотрудниками банка или службы безопасности.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;"><span>Вишинг</span> – использование SMS-сообщений для получения личных данных.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;"><span>Целенаправленный фишинг (spear phishing)</span> – злоумышленники предлагают заманчивый “приз”, но на самом деле это ловушка.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;"><span>Фарминг</span> – перенаправление пользователей на поддельные веб-сайты через зараженные DNS-серверы или вредоносное ПО.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Email-фишинг</span> – мошеннические письма и сайты, которые маскируются под легитимные ресурсы.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Смишинг</span> – телефонное мошенничество, при котором злоумышленники представляются сотрудниками банка или службы безопасности.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Вишинг</span> – использование SMS-сообщений для получения личных данных.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Целенаправленный фишинг (spear phishing)</span> – злоумышленники предлагают заманчивый “приз”, но на самом деле это ловушка.</li>
+		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Фарминг</span> – перенаправление пользователей на поддельные веб-сайты через зараженные DNS-серверы или вредоносное ПО.</li>
 	</ul>
 	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Методы защиты:</h2>
 	<ul>
@@ -137,9 +137,15 @@
 		Знание о том, как действуют злоумышленники и какие методы они используют, поможет вам защитить себя и свою информацию.
 	</p>
 	
-	<a href="{% url 'third' %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Перейти к следующему курсу</button>
-	</a>
+
+	<div style="display: flex; justify-content: space-between; align-items: center;">
+		<a href="{% url 'first' %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+			<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Перейти к прошлому курсу</button>
+		</a>
+		<a href="{% url 'third' %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
+			<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Перейти к следующему курсу</button>
+		</a>
+	</div>
 </section>
 
 	<footer class="bg-light text-center text-lg-start">

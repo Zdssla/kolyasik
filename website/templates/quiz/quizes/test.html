@@ -8,7 +8,7 @@
 {% block content %}
 <style>
   body {
-    background: url("{% static 'images/270.jpg' %}") no-repeat center center fixed;
+    background: url("{% static 'images/soc.jpg' %}") no-repeat center center fixed;
     background-size: cover; /* Масштабирование изображения для покрытия всей страницы */
     font-family: Arial, sans-serif; /* Удобный для чтения шрифт */
     color: #343a40; /* Цвет текста */
@@ -94,7 +94,7 @@
   {% endif %}
 </ul>
 
-<div id="test" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+<div id="test" style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 	<div style="margin-bottom: 20px;">
 		<p style="font-weight: bold; color: #2c3e50;">Вопрос 1: Какой из перечисленных методов наиболее точно описывает атаку социальной инженерии?</p>
 		<label style="display: block; margin-bottom: 5px;">
@@ -233,7 +233,7 @@
 			<label style="display: block; margin-bottom: 5px;">
 				<input type="radio" name="10"> Использование сложных паролей</label>
 		</div>
-	<button id="submit-test" style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">Завершить тест</button>
+<button id="submit-test" style="background-color: #145f25; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">Завершить тест</button>
 	<p id="result" style="font-size: 1.2em; line-height: 1.8; color: #34495e; margin-top: 20px;"></p>
 </div>
 <script>
@@ -244,27 +244,28 @@
 		for (let i = 1; i <= totalQuestions; i++) {
 			const radios = document.getElementsByName(i);
 			for (const radio of radios) {
-				if (radio.checked && radio.dataset.right) {
+				if (radio.checked && radio.hasAttribute('data-right')) {
 					score++;
+					break; // Exit loop once the correct answer is found
 				}
 			}
 		}
 
 		const resultText = `Вы ответили правильно на ${score} из ${totalQuestions} вопросов.`;
-		document.getElementById('result').innerText = resultText;
+		const resultElement = document.getElementById('result');
+		resultElement.innerText = resultText;
+		resultElement.style.display = 'block';
+		resultElement.style.fontSize = '1.5em';
+		resultElement.style.color = '#2c3e50';
+		resultElement.style.fontWeight = 'bold';
+		resultElement.style.marginTop = '20px';
+		resultElement.style.textAlign = 'center';
+		resultElement.style.padding = '10px';
+		resultElement.style.backgroundColor = '#e0f7fa';
+		resultElement.style.borderRadius = '5px';
+		resultElement.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+		resultElement.style.transition = 'all 0.3s ease-in-out';
+		resultElement.style.transform = 'scale(1.05)';
 	});
-	document.getElementById('result').style.display = 'block';
-	document.getElementById('result').style.fontSize = '1.5em';
-	document.getElementById('result').style.color = '#2c3e50';
-	document.getElementById('result').style.fontWeight = 'bold';
-	document.getElementById('result').style.marginTop = '20px';
-	document.getElementById('result').style.textAlign = 'center';
-	document.getElementById('result').style.padding = '10px';
-	document.getElementById('result').style.backgroundColor = '#e0f7fa';
-	document.getElementById('result').style.borderRadius = '5px';
-	document.getElementById('result').style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-	document.getElementById('result').style.transition = 'all 0.3s ease-in-out';
-	document.getElementById('result').style.transform = 'scale(1.05)';
-
 </script>
 {% endblock %}

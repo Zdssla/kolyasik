@@ -24,3 +24,12 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
+
+from django.contrib.auth.models import User
+
+class TestResult(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)  # Название теста
+    score = models.IntegerField()  # Набранные баллы
+    total = models.IntegerField()  # Максимальные баллы
+    date_taken = models.DateTimeField(auto_now_add=True)  # Дата прохождения теста

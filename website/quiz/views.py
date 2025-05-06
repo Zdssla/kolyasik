@@ -1,22 +1,8 @@
 from django.shortcuts import get_object_or_404, render
-from .models import Quiz, Question, Answer
-
-def quiz_view(request, quiz_id):
-    quiz = get_object_or_404(Quiz, id=quiz_id)  # Получение викторины по ID
-    if request.method == 'POST':
-        score = 0
-        for question in quiz.questions.all():
-            selected_answer_id = request.POST.get(str(question.id))
-            if selected_answer_id:
-                selected_answer = Answer.objects.get(id=selected_answer_id)
-                if selected_answer.is_correct:
-                    score += 1
-        return render(request, 'quiz/result.html', {'quiz': quiz, 'score': score})
-    return render(request, 'quiz/quiz.html', {'quiz': quiz})
-
-def quiz_list_view(request):
-    quizzes = Quiz.objects.all()  # Получаем все викторины
-    return render(request, 'quiz/courses.html', {'quizzes': quizzes})
+from django.utils.timezone import now
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .models import TestResult  # Предполагается, что есть модель TestResult для хранения результатов тестов
 
 def first(request):
     return render(request, 'quiz/quizes/first.html')
@@ -36,3 +22,20 @@ def courses(request):
 
 def test(request):
      return render(request, 'quiz/quizes/test.html')
+
+def save_test_result(request):
+    if request.method == 'POST':
+        # Process the test result data from the request
+        # Example: test_result = request.POST.get('test_result')
+        # Save the data to the database or perform other logic
+        return JsonResponse({'message': 'Test result saved successfully'})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+@login_required
+def profile_view(request):
+    test_results = TestResult.objects.filter(user=request.user)  # Получение результатов текущего пользователя
+    context = {
+        "user": request.user,
+        "test_results": test_results,  # Передача результатов теста
+    }
+    return render(request, "app_auth/profile.html", context)
