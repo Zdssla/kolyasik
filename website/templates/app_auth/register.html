@@ -6,29 +6,29 @@
 {% endblock %}
 
 {% block content %}
-  <ul class="nav nav-pills sticky-top bg-white nav-fill">
+<ul class="nav nav-pills sticky-top bg-white nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'main_page' %}">
+      <span style="font-weight: bold;">Главная</span>
+    </a>
+  </li>
+  {% if not user.is_authenticated %}
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'register' %}">
+      <span style="font-weight: bold;">Регистрация</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'login' %}">
+      <span style="font-weight: bold;">Войти</span>
+    </a>
+  </li>
+  {% else %}
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'main_page' %}">
-        <span style="font-weight: bold;">Главная</span>
+      <a class="nav-link" href="{% url 'courses' %}">
+        <span style="font-weight: bold;">Курсы</span>
       </a>
     </li>
-    {% if not user.is_authenticated %}
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'register' %}">
-        <span style="font-weight: bold;">Регистрация</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'login' %}">
-        <span style="font-weight: bold;">Войти</span>
-      </a>
-    </li>
-    {% else %}
-		<li class="nav-item">
-			<a class="nav-link" href="{% url 'courses' %}">
-				<span style="font-weight: bold;">Курсы</span>
-			</a>
-		</li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'profile' %}">
         <span style="font-weight: bold;">Профиль</span>
@@ -39,60 +39,130 @@
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
-    {% endif %}
-  </ul>
-	<style type="text/css">
-		body {
-			background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
-			background-size: cover;
-		}
-		
-		body::after {
-			content: "";
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(255, 255, 255, 0.6); /* Белый фон с прозрачностью 40% */
-			z-index: -1;
-		}
-		main {
-			padding: 20px;
-			position : relative;
-			z-index: 1;
-		}
-		</style>
-	<main>
-  <div class="row">
-    <div class="col" style="margin: 50px;">
-      <div class="display-2">
-       <center> <span class="badge bg-primary">Страница регистрации пользователя</span> </center>
-      </div>
-    </div>
-  </div>
-<div class="container">
-  {{ form.non_field.errors }}
-  <form method="post"> {% csrf_token %}
+  {% endif %}
+</ul>
+<style>
+  body {
+    background: url("{% static 'images/g.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.13);
+    z-index: -1;
+    pointer-events: none;
+    transition: background 0.4s;
+  }
+  .register-section {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 36px 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.13), 0 1.5px 8px 0 rgba(22,66,160,0.07);
+    margin: 48px auto;
+    max-width: 520px;
+    position: relative;
+    z-index: 1;
+  }
+  .register-section h2 {
+    font-size: 2em;
+    color: #1642a0;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(22,66,160,0.06);
+  }
+  .register-section label {
+    font-weight: 600;
+    color: #145f25;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 1.1em;
+  }
+  .register-section input[type="text"],
+  .register-section input[type="password"],
+  .register-section input[type="email"] {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1.5px solid #eaf6ff;
+    background: #f7fafd;
+    font-size: 1.1em;
+    margin-bottom: 18px;
+    transition: border 0.2s;
+  }
+  .register-section input:focus {
+    border: 1.5px solid #1642a0;
+    outline: none;
+    background: #eaf6ff;
+  }
+  .register-section button {
+    background: linear-gradient(90deg, #28a745 0%, #1642a0 100%);
+    color: white;
+    border: none;
+    padding: 15px 38px;
+    border-radius: 30px;
+    font-size: 1.18em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(22,66,160,0.10);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .register-section button:hover {
+    background: linear-gradient(90deg, #1642a0 0%, #28a745 100%);
+    box-shadow: 0 6px 24px rgba(22,66,160,0.16);
+    transform: translateY(-2px) scale(1.04);
+  }
+  .register-section .login-link {
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    color: #1642a0;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  .register-section .login-link:hover {
+    color: #28a745;
+    text-decoration: underline;
+  }
+  .register-section .form-label.bg-warning {
+    background: #fff3cd !important;
+    color: #856404 !important;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-top: 6px;
+    font-size: 0.98em;
+  }
+  @media (max-width: 600px) {
+    .register-section { padding: 16px 4px; }
+    .register-section h2 { font-size: 1.3em; }
+    .register-section button { font-size: 1em; padding: 10px 18px; }
+  }
+</style>
+<section class="register-section">
+  <h2>Регистрация пользователя</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field.errors }}
     {% for field in form %}
-    <div class="row mb-3">
-      <div class="col">
-        <label class="col-sm-4 col-form-label offset-4">{{ field.label }}</label>
-        <div class="col-sm-4 offset-4 w-25">
-          {{ field }}
-          {% if field.errors %}
-          <div class="form-label bg-warning" style="margin: 10px 0px;"> {{ field.errors }}</div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}
+        <div class="form-label bg-warning">{{ field.errors }}</div>
+      {% endif %}
     {% endfor %}
-    <div class="row mb-3 offset-sm-5">
-      <div class="col">
-        <button type="submit" class="btn btn-success">Принять</button>
-      </div>
-    </div>
+    <button type="submit">Зарегистрироваться</button>
   </form>
-</div>
-</main>
+  <a href="{% url 'login' %}" class="login-link">Уже есть аккаунт? Войти</a>
+</section>
 {% endblock %}

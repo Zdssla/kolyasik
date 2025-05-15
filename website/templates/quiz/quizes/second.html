@@ -8,150 +8,294 @@
 {% block content %}
 <style>
   body {
-    background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
-    background-size: cover; /* Масштабирование изображения для покрытия всей страницы */
-    font-family: Arial, sans-serif; /* Удобный для чтения шрифт */
-    color: #343a40; /* Цвет текста */
+    background: url("{% static 'images/g.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    color: #343a40;
     margin: 0;
     padding: 0;
   }
-
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.13);
+    z-index: -1;
+    pointer-events: none;
+    transition: background 0.4s;
+  }
   section {
-    background: rgba(255, 255, 255, 0.9); /* Белый фон с прозрачностью для контента */
-    padding: 20px; /* Внутренние отступы */
-    border-radius: 8px; /* Скругленные углы */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
-    margin: 20px auto; /* Отступы сверху и снизу */
-    max-width: 1500px; /* Максимальная ширина секции */
+    background: rgba(255, 255, 255, 0.98);
+    padding: 36px 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.13), 0 1.5px 8px 0 rgba(22,66,160,0.07);
+    margin: 36px auto;
+    max-width: 950px;
+    position: relative;
+    z-index: 1;
   }
-
-  h1, h2 {
-    color: #343a40; /* Темный цвет для заголовков */
-  }
-
   h1 {
-    font-size: 2em; /* Увеличенный размер заголовка */
-    margin-bottom: 15px; /* Отступ снизу */
+    font-size: 2.3em;
+    color: #1642a0;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(22,66,160,0.06);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.7s, transform 0.7s;
   }
-
+  h1.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
   h2 {
-    font-size: 1.5em; /* Размер подзаголовка */
-    margin-top: 20px; /* Отступ сверху */
-    margin-bottom: 10px; /* Отступ снизу */
+    font-size: 1.5em;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    color: #145f25;
+    font-weight: 700;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.7s, transform 0.7s;
   }
-
-	ul {
-		margin-left: 20px; /* Отступ слева */
-		list-style-type: none; /* Убираем кружочки в списках */
-	}
-
-	ul li {
-		margin-bottom: 10px; /* Отступ между элементами списка */
-	}
-
-	ul li span {
-		font-weight: bold; /* Жирный текст для важных элементов */
-	}
-
-	p {
-		margin-bottom: 15px; /* Отступ снизу для абзацев */
-	}
+  h2.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  p {
+    margin-bottom: 18px;
+    font-size: 1.18em;
+    line-height: 1.8;
+    color: #34495e;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  p.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  section ul {
+    margin-left: 0;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  section ul li {
+    background: linear-gradient(90deg, #f7fafd 60%, #eaf6ff 100%);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(22,66,160,0.06);
+    padding: 16px 26px 16px 56px;
+    position: relative;
+    font-size: 1.15em;
+    line-height: 1.7;
+    color: #34495e;
+    margin-bottom: 0;
+    flex: 1 1 340px;
+    min-width: 260px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: box-shadow 0.2s, background 0.2s, transform 0.15s, opacity 0.6s;
+  }
+  section ul li:last-child { margin-bottom: 0; }
+  section ul li span {
+    font-weight: bold;
+    color: #1642a0;
+  }
+  section ul li:before {
+    content: "❗";
+    color: #e74c3c;
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    font-size: 1.3em;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  section ul li[data-type="protect"]:before {
+    content: "✅";
+    color: #28a745;
+  }
+  section ul li.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  section ul li.visible:before {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .course-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+    gap: 16px;
+  }
+  .course-nav a {
+    text-decoration: none;
+  }
+  .course-nav button {
+    background: linear-gradient(90deg, #28a745 0%, #1642a0 100%);
+    color: white;
+    border: none;
+    padding: 15px 38px;
+    border-radius: 30px;
+    font-size: 1.18em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(22,66,160,0.10), 0 0 0 0 #28a745;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .course-nav button:hover {
+    background: linear-gradient(90deg, #1642a0 0%, #28a745 100%);
+    box-shadow: 0 6px 24px rgba(22,66,160,0.16);
+    transform: translateY(-2px) scale(1.04);
+  }
+  .course-nav button:active {
+    box-shadow: 0 2px 12px rgba(22,66,160,0.10), 0 0 0 4px #28a74533;
+    transform: scale(0.98);
+  }
+  @media (max-width: 900px) {
+    section ul { flex-direction: column; gap: 10px; }
+    section ul li { min-width: unset; }
+    .course-nav { flex-direction: column; gap: 10px; }
+    .course-nav button { font-size: 1em; padding: 10px 18px; }
+  }
+  @media (max-width: 700px) {
+    section { padding: 12px 2px; }
+    h1 { font-size: 1.3em; }
+    section ul li { font-size: 1em; padding-left: 38px; }
+  }
 </style>
 
 <ul class="nav nav-pills sticky-top bg-white nav-fill">
   <li class="nav-item">
     <a class="nav-link" aria-current="page" href="{% url 'main_page' %}">
-      <span style="font-weight: bold;">Главная</span>
+      Главная
     </a>
   </li>
 {% if not user.is_authenticated %}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'register' %}">
-      <span style="font-weight: bold;">Регистрация</span>
+      Регистрация
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{% url 'login' %}">
-      <span style="font-weight: bold;">Войти</span>
+      Войти
     </a>
   </li>
   {% else %}
     <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="{% url 'courses' %}">
-      <span style="font-weight: bold;">Курсы</span>
+      Курсы
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{% url 'profile' %}">
-      <span style="font-weight: bold;">Профиль</span>
+      Профиль
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{% url 'logout' %}">
-      <span style="font-weight: bold;">Выйти</span>
+      Выйти
     </a>
   </li>
   {% endif %}
 </ul>
 
 <section>
-	<h1 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Что такое фишинг?</h1>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Фишинг – это мошенничество, при котором злоумышленники выдают себя за доверенные источники, чтобы получить личные данные пользователей. 
-		Часто злоумышленники используют электронные письма, сообщения в социальных сетях или поддельные веб-сайты, чтобы обмануть жертву. 
-		Целью таких атак может быть получение паролей, номеров банковских карт, персональных данных или другой конфиденциальной информации.
-	</p>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Фишинг является одной из самых распространенных форм киберпреступности, так как он относительно прост в реализации и может быть нацелен на широкий круг пользователей. 
-		Злоумышленники часто используют социальную инженерию, чтобы вызвать у жертвы чувство срочности или страха, заставляя её действовать необдуманно.
-	</p>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Современные фишинговые атаки становятся всё более изощренными, включая использование поддельных веб-сайтов, которые практически невозможно отличить от настоящих, 
-		а также персонализированные сообщения, которые делают атаки более убедительными.
-	</p>
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Основные виды фишинга:</h2>
-	<ul>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Email-фишинг</span> – мошеннические письма и сайты, которые маскируются под легитимные ресурсы.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Смишинг</span> – телефонное мошенничество, при котором злоумышленники представляются сотрудниками банка или службы безопасности.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Вишинг</span> – использование SMS-сообщений для получения личных данных.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Целенаправленный фишинг (spear phishing)</span> – злоумышленники предлагают заманчивый “приз”, но на самом деле это ловушка.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Фарминг</span> – перенаправление пользователей на поддельные веб-сайты через зараженные DNS-серверы или вредоносное ПО.</li>
-	</ul>
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Методы защиты:</h2>
-	<ul>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Для защиты от <span>Email-фишинга</span>: проверяйте адрес отправителя, не открывайте подозрительные письма и ссылки, используйте антифишинговые фильтры.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Для защиты от <span>Смишинга</span>: не сообщайте личные данные по телефону, проверяйте подлинность звонящего, не доверяйте незнакомым номерам.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Для защиты от <span>Вишинга</span>: не переходите по ссылкам из подозрительных SMS, проверяйте отправителя сообщения, не вводите данные на подозрительных сайтах.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Для защиты от <span>Целенаправленного фишинга</span>: будьте осторожны с заманчивыми предложениями, проверяйте подлинность источника, не вводите данные на незнакомых ресурсах.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Для защиты от <span>Фарминга</span>: используйте антивирусное ПО, проверяйте адресную строку браузера, избегайте переходов по подозрительным ссылкам.</li>
-	</ul>
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Почему важно знать о фишинге?</h2>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Фишинг представляет серьёзную угрозу как для частных лиц, так и для организаций. Потеря конфиденциальных данных может привести к финансовым убыткам, краже личности и другим негативным последствиям. 
-		Обучение сотрудников и пользователей основам кибербезопасности, а также внедрение современных технологий защиты, таких как двухфакторная аутентификация, помогают минимизировать риски.
-	</p>
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Заключение</h2>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Фишинг – это не просто техническая угроза, но и психологическая манипуляция, которая может привести к серьёзным последствиям. 
-		Важно быть внимательным и осторожным в своих действиях в интернете и в реальной жизни.
-		Знание о том, как действуют злоумышленники и какие методы они используют, поможет вам защитить себя и свою информацию.
-	</p>
-	
-
-	<div style="display: flex; justify-content: space-between; align-items: center;">
-		<a href="{% url 'first' %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-			<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Перейти к прошлому курсу</button>
-		</a>
-		<a href="{% url 'third' %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-			<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Перейти к следующему курсу</button>
-		</a>
-	</div>
+  <h1>Что такое фишинг?</h1>
+  <p>
+    Фишинг – это мошенничество, при котором злоумышленники выдают себя за доверенные источники, чтобы получить личные данные пользователей. 
+    Часто злоумышленники используют электронные письма, сообщения в социальных сетях или поддельные веб-сайты, чтобы обмануть жертву. 
+    Целью таких атак может быть получение паролей, номеров банковских карт, персональных данных или другой конфиденциальной информации.
+  </p>
+  <p>
+    Фишинг является одной из самых распространенных форм киберпреступности, так как он относительно прост в реализации и может быть нацелен на широкий круг пользователей. 
+    Злоумышленники часто используют социальную инженерию, чтобы вызвать у жертвы чувство срочности или страха, заставляя её действовать необдуманно.
+  </p>
+  <p>
+    Современные фишинговые атаки становятся всё более изощренными, включая использование поддельных веб-сайтов, которые практически невозможно отличить от настоящих, 
+    а также персонализированные сообщения, которые делают атаки более убедительными.
+  </p>
+  <h2>Основные виды фишинга</h2>
+  <ul>
+    <li> <span>Email-фишинг</span> – мошеннические письма и сайты, которые маскируются под легитимные ресурсы.</li>
+    <li> <span>Смишинг</span> – телефонное мошенничество, при котором злоумышленники представляются сотрудниками банка или службы безопасности.</li>
+    <li> <span>Вишинг</span> – использование SMS-сообщений для получения личных данных.</li>
+    <li> <span>Целенаправленный фишинг (spear phishing)</span> – злоумышленники предлагают заманчивый “приз”, но на самом деле это ловушка.</li>
+    <li> <span>Фарминг</span> – перенаправление пользователей на поддельные веб-сайты через зараженные DNS-серверы или вредоносное ПО.</li>
+  </ul>
+  <h2>Методы защиты</h2>
+  <ul>
+    <li data-type="protect">Для защиты от <span>Email-фишинга</span>: проверяйте адрес отправителя, не открывайте подозрительные письма и ссылки, используйте антифишинговые фильтры.</li>
+    <li data-type="protect">Для защиты от <span>Смишинга</span>: не сообщайте личные данные по телефону, проверяйте подлинность звонящего, не доверяйте незнакомым номерам.</li>
+    <li data-type="protect">Для защиты от <span>Вишинга</span>: не переходите по ссылкам из подозрительных SMS, проверяйте отправителя сообщения, не вводите данные на подозрительных сайтах.</li>
+    <li data-type="protect">Для защиты от <span>Целенаправленного фишинга</span>: будьте осторожны с заманчивыми предложениями, проверяйте подлинность источника, не вводите данные на незнакомых ресурсах.</li>
+    <li data-type="protect">Для защиты от <span>Фарминга</span>: используйте антивирусное ПО, проверяйте адресную строку браузера, избегайте переходов по подозрительным ссылкам.</li>
+  </ul>
+  <h2>Почему важно знать о фишинге?</h2>
+  <p>
+    Фишинг представляет серьёзную угрозу как для частных лиц, так и для организаций. Потеря конфиденциальных данных может привести к финансовым убыткам, краже личности и другим негативным последствиям. 
+    Обучение сотрудников и пользователей основам кибербезопасности, а также внедрение современных технологий защиты, таких как двухфакторная аутентификация, помогают минимизировать риски.
+  </p>
+  <h2>Заключение</h2>
+  <p>
+    Фишинг – это не просто техническая угроза, но и психологическая манипуляция, которая может привести к серьёзным последствиям. 
+    Важно быть внимательным и осторожным в своих действиях в интернете и в реальной жизни.
+    Знание о том, как действуют злоумышленники и какие методы они используют, поможет вам защитить себя и свою информацию.
+  </p>
+  <div class="course-nav">
+    <a href="{% url 'first' %}">
+      <button>Перейти к прошлому курсу</button>
+    </a>
+    <a href="{% url 'third' %}">
+      <button>Перейти к следующему курсу</button>
+    </a>
+  </div>
 </section>
 
-	<footer class="bg-light text-center text-lg-start">
-		<div class="text-center p-3" style="background-color: #f8f9fa;">
-			© 2025 Все права защищены
-		</div>
-	</footer>
+<script>
+  // Анимация появления элементов секции при прокрутке
+  document.addEventListener('DOMContentLoaded', function () {
+    function revealSectionElements() {
+      // Заголовки и параграфы
+      document.querySelectorAll('section h1, section h2, section p').forEach(function (el, idx) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 40) {
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, idx * 100);
+        }
+      });
+      // Пункты списка
+      document.querySelectorAll('section ul li').forEach(function (li, idx) {
+        const rect = li.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 40) {
+          setTimeout(() => {
+            li.classList.add('visible');
+          }, idx * 120);
+        }
+      });
+    }
+    revealSectionElements();
+    window.addEventListener('scroll', revealSectionElements);
+  });
+</script>
 
+<footer class="bg-light text-center text-lg-start">
+  <div class="text-center p-3" style="background-color: #f8f9fa;">
+    © 2025 Все права защищены
+  </div>
+</footer>
 {% endblock %}

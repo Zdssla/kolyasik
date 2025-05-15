@@ -8,144 +8,286 @@
 {% block content %}
 <style>
   body {
-    background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
-    background-size: cover; /* Масштабирование изображения для покрытия всей страницы */
-    font-family: Arial, sans-serif; /* Удобный для чтения шрифт */
-    color: #343a40; /* Цвет текста */
+    background: url("{% static 'images/g.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    color: #343a40;
     margin: 0;
     padding: 0;
   }
-
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.13);
+    z-index: -1;
+    pointer-events: none;
+    transition: background 0.4s;
+  }
   section {
-    background: rgba(255, 255, 255, 0.9); /* Белый фон с прозрачностью для контента */
-    padding: 20px; /* Внутренние отступы */
-    border-radius: 8px; /* Скругленные углы */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень */
-    margin: 20px auto; /* Отступы сверху и снизу */
-    max-width: 1500px; /* Максимальная ширина секции */
+    background: rgba(255, 255, 255, 0.98);
+    padding: 36px 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.13), 0 1.5px 8px 0 rgba(22,66,160,0.07);
+    margin: 36px auto;
+    max-width: 950px;
+    position: relative;
+    z-index: 1;
   }
-
-  h1, h2 {
-    color: #343a40; /* Темный цвет для заголовков */
-  }
-
   h1 {
-    font-size: 2em; /* Увеличенный размер заголовка */
-    margin-bottom: 15px; /* Отступ снизу */
+    font-size: 2.3em;
+    color: #1642a0;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(22,66,160,0.06);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.7s, transform 0.7s;
   }
-
+  h1.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
   h2 {
-    font-size: 1.5em; /* Размер подзаголовка */
-    margin-top: 20px; /* Отступ сверху */
-    margin-bottom: 10px; /* Отступ снизу */
+    font-size: 1.5em;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    color: #145f25;
+    font-weight: 700;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.7s, transform 0.7s;
   }
-
-	ul {
-		margin-left: 20px; /* Отступ слева */
-		list-style-type: none; /* Убираем кружочки в списках */
-	}
-
-	ul li {
-		margin-bottom: 10px; /* Отступ между элементами списка */
-	}
-
-	ul li span {
-		font-weight: bold; /* Жирный текст для важных элементов */
-	}
-
-	p {
-		margin-bottom: 15px; /* Отступ снизу для абзацев */
-	}
+  h2.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  p {
+    margin-bottom: 18px;
+    font-size: 1.18em;
+    line-height: 1.8;
+    color: #34495e;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  p.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  section ul {
+    margin-left: 0;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  section ul li {
+    background: linear-gradient(90deg, #f7fafd 60%, #eaf6ff 100%);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(22,66,160,0.06);
+    padding: 16px 26px 16px 56px;
+    position: relative;
+    font-size: 1.15em;
+    line-height: 1.7;
+    color: #34495e;
+    margin-bottom: 0;
+    flex: 1 1 340px;
+    min-width: 260px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: box-shadow 0.2s, background 0.2s, transform 0.15s, opacity 0.6s;
+  }
+  section ul li:last-child { margin-bottom: 0; }
+  section ul li span {
+    font-weight: bold;
+    color: #1642a0;
+  }
+  section ul li:before {
+    content: "❗";
+    color: #e74c3c;
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    font-size: 1.3em;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  section ul li[data-type="protect"]:before,
+  section ul li[data-type="success"]:before {
+    content: "✅";
+    color: #28a745;
+  }
+  section ul li.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  section ul li.visible:before {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .course-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+    gap: 16px;
+  }
+  .course-nav a {
+    text-decoration: none;
+  }
+  .course-nav button {
+    background: linear-gradient(90deg, #28a745 0%, #1642a0 100%);
+    color: white;
+    border: none;
+    padding: 15px 38px;
+    border-radius: 30px;
+    font-size: 1.18em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(22,66,160,0.10), 0 0 0 0 #28a745;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .course-nav button:hover {
+    background: linear-gradient(90deg, #1642a0 0%, #28a745 100%);
+    box-shadow: 0 6px 24px rgba(22,66,160,0.16);
+    transform: translateY(-2px) scale(1.04);
+  }
+  .course-nav button:active {
+    box-shadow: 0 2px 12px rgba(22,66,160,0.10), 0 0 0 4px #28a74533;
+    transform: scale(0.98);
+  }
+  @media (max-width: 900px) {
+    section ul { flex-direction: column; gap: 10px; }
+    section ul li { min-width: unset; }
+    .course-nav { flex-direction: column; gap: 10px; }
+    .course-nav button { font-size: 1em; padding: 10px 18px; }
+  }
+  @media (max-width: 700px) {
+    section { padding: 12px 2px; }
+    h1 { font-size: 1.3em; }
+    section ul li { font-size: 1em; padding-left: 38px; }
+  }
 </style>
 
 <ul class="nav nav-pills sticky-top bg-white nav-fill">
   <li class="nav-item">
     <a class="nav-link" aria-current="page" href="{% url 'main_page' %}">
-      <span style="font-weight: bold;">Главная</span>
+      Главная
     </a>
   </li>
 {% if not user.is_authenticated %}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'register' %}">
-      <span style="font-weight: bold;">Регистрация</span>
+      Регистрация
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{% url 'login' %}">
-      <span style="font-weight: bold;">Войти</span>
+      Войти
     </a>
   </li>
   {% else %}
     <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="{% url 'courses' %}">
-      <span style="font-weight: bold;">Курсы</span>
+      Курсы
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{% url 'profile' %}">
-      <span style="font-weight: bold;">Профиль</span>
+      Профиль
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{% url 'logout' %}">
-      <span style="font-weight: bold;">Выйти</span>
+      Выйти
     </a>
   </li>
   {% endif %}
 </ul>
 
 <section>
-	<h1 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Популярные методы атак</h1>
+  <h1>Популярные методы атак</h1>
+  <p>
+    Социальные инженеры используют различные способы манипуляции, чтобы выманить у жертвы данные или заставить её совершить определённые действия. Эти методы основываются на психологии и доверии. Основная цель социальной инженерии – обмануть человека, чтобы он сам предоставил доступ к конфиденциальной информации или выполнил действия, которые нарушают безопасность. 
+    Социальная инженерия часто используется в сочетании с другими методами атак, такими как фишинг, вредоносное ПО или взлом систем. Она может быть направлена как на отдельных людей, так и на организации.
+  </p>
+  <h2>Основные методы</h2>
+  <ul>
+    <li> <span>Претекстинг</span> – мошенник создает ложную ситуацию, чтобы получить доступ к информации, например, выдавая себя за сотрудника компании или техническую поддержку. Этот метод часто используется для получения паролей, финансовых данных или другой конфиденциальной информации.</li>
+    <li> <span>Бейтинг</span> – мошенники предлагают что-то привлекательное (например, флешку с вирусом или бесплатный доступ к платным ресурсам), чтобы жертва сама установила вредоносное ПО. Этот метод эксплуатирует любопытство или жадность жертвы.</li>
+    <li> <span>Tailgating (следование)</span> – вход в здание или систему вслед за легитимным пользователем, часто с использованием поддельного пропуска или просьбы "подержать дверь". Этот метод особенно опасен в организациях с физической защитой.</li>
+    <li> <span>Подмена звонящего номера</span> – создание иллюзии звонка от банка, службы безопасности или другой организации для получения конфиденциальной информации. Этот метод часто используется для кражи денег или данных.</li>
+  </ul>
+  <h2>Методы защиты</h2>
+  <ul>
+    <li data-type="success">При подозрительных запросах всегда проверяйте личность собеседника, особенно если он утверждает, что представляет компанию или службу поддержки (защита от претекстинга).</li>
+    <li data-type="success">Никогда не подключайте неизвестные устройства, такие как флешки, к своим компьютерам или телефонам (защита от бейтинга).</li>
+    <li data-type="success">Не позволяйте незнакомцам входить в здание или защищённые зоны вместе с вами, даже если они просят "подержать дверь" (защита от tailgating).</li>
+    <li data-type="success">Всегда проверяйте номер звонящего и не передавайте конфиденциальные данные по телефону, если не уверены в подлинности звонка (защита от подмены звонящего номера).</li>
+  </ul>
+  <h2>Почему социальная инженерия эффективна?</h2>
+  <p>
+    Социальная инженерия эффективна, потому что она использует человеческие эмоции, такие как страх, доверие, любопытство или желание помочь. Люди склонны доверять авторитетным фигурам, реагировать на срочные запросы или помогать другим в сложных ситуациях. Мошенники используют эти слабости, чтобы манипулировать своими жертвами.
+  </p>
+  <p>
+    Кроме того, многие люди недостаточно осведомлены о методах социальной инженерии, что делает их более уязвимыми. Обучение и повышение осведомлённости – ключевые шаги для защиты от таких атак.
+  </p>
+  <h2>Заключение</h2>
+  <p>
+    Социальная инженерия – это мощный инструмент, который может быть использован как для защиты, так и для атаки. Понимание методов социальной инженерии и способов защиты от них поможет вам защитить себя и свою информацию.
+    Важно помнить, что безопасность – это не только технологии, но и люди. Обучение и повышение осведомлённости о методах социальной инженерии – это важные шаги к созданию безопасной среды.
+    Будьте внимательны и осторожны в своих действиях в интернете и в реальной жизни. Защита от социальной инженерии начинается с вас!
+  </p>
+  <div class="course-nav">
+    <a href="{% url 'second' %}">
+      <button>Перейти к прошлому курсу</button>
+    </a>
+    <a href="{% url 'fourth' %}">
+      <button>Перейти к следующему курсу</button>
+    </a>
+  </div>
+</section>
 
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Социальные инженеры используют различные способы манипуляции, чтобы выманить у жертвы данные или заставить её совершить определённые действия. Эти методы основываются на психологии и доверии. Основная цель социальной инженерии – обмануть человека, чтобы он сам предоставил доступ к конфиденциальной информации или выполнил действия, которые нарушают безопасность. 
-		Социальная инженерия часто используется в сочетании с другими методами атак, такими как фишинг, вредоносное ПО или взлом систем. Она может быть направлена как на отдельных людей, так и на организации.
-	</p>
-
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Основные методы:</h2>
-	<ul>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Претекстинг</span> – мошенник создает ложную ситуацию, чтобы получить доступ к информации, например, выдавая себя за сотрудника компании или техническую поддержку. Этот метод часто используется для получения паролей, финансовых данных или другой конфиденциальной информации.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Бейтинг</span> – мошенники предлагают что-то привлекательное (например, флешку с вирусом или бесплатный доступ к платным ресурсам), чтобы жертва сама установила вредоносное ПО. Этот метод эксплуатирует любопытство или жадность жертвы.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Tailgating (следование)</span> – вход в здание или систему вслед за легитимным пользователем, часто с использованием поддельного пропуска или просьбы "подержать дверь". Этот метод особенно опасен в организациях с физической защитой.</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">❗ <span>Подмена звонящего номера</span> – создание иллюзии звонка от банка, службы безопасности или другой организации для получения конфиденциальной информации. Этот метод часто используется для кражи денег или данных.</li>
-	</ul>
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Методы защиты:</h2>
-	<ul>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ При подозрительных запросах всегда проверяйте личность собеседника, особенно если он утверждает, что представляет компанию или службу поддержки (защита от претекстинга).</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Никогда не подключайте неизвестные устройства, такие как флешки, к своим компьютерам или телефонам (защита от бейтинга).</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Не позволяйте незнакомцам входить в здание или защищённые зоны вместе с вами, даже если они просят "подержать дверь" (защита от tailgating).</li>
-		<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">✅ Всегда проверяйте номер звонящего и не передавайте конфиденциальные данные по телефону, если не уверены в подлинности звонка (защита от подмены звонящего номера).</li>
-	</ul>
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Почему социальная инженерия эффективна?</h2>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Социальная инженерия эффективна, потому что она использует человеческие эмоции, такие как страх, доверие, любопытство или желание помочь. Люди склонны доверять авторитетным фигурам, реагировать на срочные запросы или помогать другим в сложных ситуациях. Мошенники используют эти слабости, чтобы манипулировать своими жертвами.
-	</p>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Кроме того, многие люди недостаточно осведомлены о методах социальной инженерии, что делает их более уязвимыми. Обучение и повышение осведомлённости – ключевые шаги для защиты от таких атак.
-	</p>
-	<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Заключение</h2>
-	<p style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-		Социальная инженерия – это мощный инструмент, который может быть использован как для защиты, так и для атаки. Понимание методов социальной инженерии и способов защиты от них поможет вам защитить себя и свою информацию.
-
-		Важно помнить, что безопасность – это не только технологии, но и люди. Обучение и повышение осведомлённости о методах социальной инженерии – это важные шаги к созданию безопасной среды.
-		Будьте внимательны и осторожны в своих действиях в интернете и в реальной жизни. Защита от социальной инженерии начинается с вас!
-	</p>
-
-	<div style="display: flex; justify-content: space-between; align-items: center;">
-		<a href="{% url 'second' %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-			<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Перейти к прошлому курсу</button>
-		</a>
-		<a href="{% url 'fourth' %}" style="font-size: 1.2em; line-height: 1.8; color: #34495e;">
-			<button style="background-color: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer;">Перейти к следующему курсу</button>
-		</a>
-	</div>
-
-	</section>
+<script>
+  // Анимация появления элементов секции при прокрутке
+  document.addEventListener('DOMContentLoaded', function () {
+    function revealSectionElements() {
+      // Заголовки и параграфы
+      document.querySelectorAll('section h1, section h2, section p').forEach(function (el, idx) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 40) {
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, idx * 100);
+        }
+      });
+      // Пункты списка
+      document.querySelectorAll('section ul li').forEach(function (li, idx) {
+        const rect = li.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 40) {
+          setTimeout(() => {
+            li.classList.add('visible');
+          }, idx * 120);
+        }
+      });
+    }
+    revealSectionElements();
+    window.addEventListener('scroll', revealSectionElements);
+  });
+</script>
 
 <footer class="bg-light text-center text-lg-start">
-	<div class="text-center p-3" style="background-color: #f8f9fa;">
-		© 2025 Все права защищены
-	</div>
+  <div class="text-center p-3" style="background-color: #f8f9fa;">
+    © 2025 Все права защищены
+  </div>
 </footer>
-
 {% endblock %}

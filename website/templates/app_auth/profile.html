@@ -43,82 +43,200 @@
 </ul>
 <style type="text/css">
 	body {
-			background: url("{% static 'images/g.jpg' %}") no-repeat center center fixed;
-			background-size: cover;
+		background: url("{% static 'images/g.jpg' %}") no-repeat center center fixed;
+		background-size: cover;
+		font-family: 'Segoe UI', 'Arial', sans-serif;
+		color: #343a40;
+		margin: 0;
+		padding: 0;
 	}
-	
 	body::after {
-			content: "";
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(255, 255, 255, 0.1); /* Белый фон с прозрачностью 40% */
-			z-index: -1;
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(255,255,255,0.13);
+		z-index: -1;
+		pointer-events: none;
+		transition: background 0.4s;
 	}
 	main {
-			padding: 20px;
-			position: relative;
-			z-index: 1;
-			text-align: left; /* Выравнивание текста по левому краю */
+		max-width: 700px;
+		margin: 48px auto 48px auto;
+		background: rgba(255,255,255,0.98);
+		border-radius: 22px;
+		box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.13), 0 1.5px 8px 0 rgba(22,66,160,0.07);
+		padding: 44px 36px 36px 36px;
+		position: relative;
+		z-index: 1;
+		text-align: left;
+		overflow: hidden;
 	}
-	
-	section {
-			margin: 20px 0;
-			padding: 15px;
-			border-radius: 5px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-			background: white;
-			text-align: left; /* Выравнивание текста по левому краю */
+	h1 {
+		font-size: 2.3em;
+		color: #1642a0;
+		text-align: center;
+		margin-bottom: 30px;
+		font-weight: 800;
+		letter-spacing: 1px;
+		text-shadow: 0 2px 8px rgba(22,66,160,0.06);
+		opacity: 0;
+		transform: translateY(-20px);
+		transition: opacity 0.7s, transform 0.7s;
+	}
+	h1.visible {
+		opacity: 1;
+		transform: translateY(0);
 	}
 	h2 {
-	font-size: 2em; /* Увеличиваем размер заголовка */
-	margin-bottom: 20px; /* Отступ снизу */
-	color: #333; /* Цвет заголовка */
-}
-	
-	ul {
-			list-style-type: none; /* Убираем стандартные маркеры списка */
-			padding: 0;
+		font-size: 1.5em;
+		margin-bottom: 20px;
+		color: #145f25;
+		font-weight: 700;
+		text-align: left;
+		opacity: 0;
+		transform: translateY(-20px);
+		transition: opacity 0.7s, transform 0.7s;
 	}
-	
-	ul li {
-			margin-bottom: 15px; /* Отступ между элементами списка */
-			font-size: 1.2em; /* Увеличиваем размер текста */
-			line-height: 1.5; /* Увеличиваем межстрочный интервал */
+	h2.visible {
+		opacity: 1;
+		transform: translateY(0);
 	}
-	
-	ul li a {
-			text-decoration: none; /* Убираем подчеркивание ссылок */
-			color: #007BFF; /* Цвет ссылок */
-			font-weight: bold; /* Жирный текст для ссылок */
+	h3 {
+		font-size: 1.1em;
+		line-height: 1.7;
+		color: #34495e;
+		margin-bottom: 22px;
+		font-weight: 500;
+		text-align: center;
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.7s, transform 0.7s;
 	}
-	
-	ul li a:hover {
-			text-decoration: underline; /* Подчеркивание при наведении */
-			color: #0056b3; /* Более темный оттенок синего при наведении */
+	h3.visible {
+		opacity: 1;
+		transform: translateY(0);
 	}
-	
-	button {
-			background-color: #28a745;
-			color: white;
-			border: none;
-			padding: 10px 15px;
-			cursor: pointer;
+	.profile-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 30px 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+	}
+	.profile-list li {
+		background: linear-gradient(90deg, #f7fafd 60%, #eaf6ff 100%);
+		border-radius: 12px;
+		box-shadow: 0 2px 10px rgba(22,66,160,0.06);
+		padding: 18px 22px 18px 54px;
+		position: relative;
+		font-size: 1.13em;
+		line-height: 1.6;
+		color: #34495e;
+		margin-bottom: 0;
+		flex: 1 1 300px;
+		min-width: 220px;
+		opacity: 0;
+		transform: translateY(30px);
+		transition: box-shadow 0.2s, background 0.2s, transform 0.15s, opacity 0.6s;
+	}
+	.profile-list li.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	.profile-list li:last-child {
+		margin-bottom: 0;
+	}
+	.profile-list li:before {
+		content: "👤";
+		color: #1642a0;
+		position: absolute;
+		left: 18px;
+		top: 18px;
+		font-size: 1.2em;
+		font-weight: bold;
+		opacity: 0;
+		transform: translateY(-10px) scale(0.8);
+		transition: opacity 0.4s, transform 0.4s;
+	}
+	.profile-list li.visible:before {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	.profile-list li:nth-child(2):before { content: "✉️"; }
+	.profile-list li:nth-child(3):before { content: "📅"; }
+	.profile-list li:nth-child(4):before { content: "🚪"; }
+	.profile-list li a {
+		color: #007BFF;
+		font-weight: bold;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.profile-list li a:hover {
+		text-decoration: underline;
+		color: #145f25;
+	}
+	@media (max-width: 600px) {
+		main { padding: 12px 2px 12px 2px; }
+		h1 { font-size: 1.3em; }
+		.profile-list { flex-direction: column; gap: 10px; }
+		.profile-list li { font-size: 1em; padding-left: 38px; min-width: unset; }
 	}
 </style>
 <main>
-<h1 style="font-size: 2.5em; color: #2c3e50; text-align: left; margin-bottom: 30px;">Профиль пользователя</h1>
-<br>
-<h3 style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Пожалуйста, убедитесь, что ваши данные актуальны и точны.</h3>
-<br>
-<h2 style="font-size: 2em; color: #1642a0; margin-top: 40px; margin-bottom: 20px;">Ваши данные</h2>
-<ul>
-	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Имя пользователя: {{ user.username }}</li>
-	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Email: {{ user.email }}</li>
-	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Дата регистрации: {{ user.date_joined }}</li>
-	<li style="font-size: 1.2em; line-height: 1.8; color: #34495e;">Если вы хотите выйти из своего аккаунта, нажмите <a href="{% url 'logout' %}">Выйти</a>.</li>
-</ul>
+	<h1>Профиль пользователя</h1>
+	<h3>Пожалуйста, убедитесь, что ваши данные актуальны и точны.</h3>
+	<h2>Ваши данные</h2>
+	<ul class="profile-list">
+		<li>Имя пользователя: {{ user.username }}</li>
+		<li>Email: {{ user.email }}</li>
+		<li>Дата регистрации: {{ user.date_joined }}</li>
+		<li>Если вы хотите выйти из своего аккаунта, нажмите <a href="{% url 'logout' %}">Выйти</a>.</li>
+	</ul>
+	<h2 style="margin-top:32px;">Ваши результаты</h2>
+	<div style="margin-bottom: 12px; font-size: 1.13em; color: #145f25; font-weight: 600;">
+		Количество прохождений теста: {{ quiz_testresult|length }}
+	</div>
+	<ul class="profile-list">
+		{% for result in quiz_testresult %}
+			<li {% if forloop.first %} style="background:linear-gradient(90deg,#e3fcec 60%,#eaf6ff 100%);border:2px solid #28a745;"{% endif %}>
+				Результат: <b>{{ result.score }}</b> из <b>{{ result.total }}</b>
+				&mdash; {{ result.created_at|date:"d.m.Y H:i" }}
+				{% if forloop.first %}
+					<span style="color:#28a745;font-weight:bold;margin-left:10px;">(активный результат)</span>
+				{% endif %}
+			</li>
+		{% empty %}
+			<li>Вы ещё не проходили тест.</li>
+		{% endfor %}
+	</ul>
 </main>
+<script>
+  // Анимация появления элементов секции при прокрутке
+  document.addEventListener('DOMContentLoaded', function () {
+    function revealSectionElements() {
+      document.querySelectorAll('main h1, main h2, main h3').forEach(function (el, idx) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 40) {
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, idx * 100);
+        }
+      });
+      document.querySelectorAll('.profile-list li').forEach(function (li, idx) {
+        const rect = li.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 40) {
+          setTimeout(() => {
+            li.classList.add('visible');
+          }, idx * 120);
+        }
+      });
+    }
+    revealSectionElements();
+    window.addEventListener('scroll', revealSectionElements);
+  });
+</script>
 {% endblock %}

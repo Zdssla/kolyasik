@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'app_auth',
-	'quiz',
+		'quiz',
 ]
 
 MIDDLEWARE = [
@@ -114,3 +114,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     Path.joinpath(BASE_DIR, 'static') 
 ]
+
+'django.db.models.BigAutoField' if os.environ.get('USE_BIG_AUTO_FIELD') else 'django.db.models.AutoField'
